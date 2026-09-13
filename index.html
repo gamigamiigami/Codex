@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d2a">
+  <meta name="description" content="世界の偉人の言葉を一日一言。ボタンを押して、今日のことばを引いてみましょう。">
+  <title>今日のことばみくじ</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23102d2a'/%3E%3Cpath d='M18 13h28v38H18z' fill='%23f6f0de'/%3E%3Cpath d='M25 22h14M25 29h14M25 36h10' stroke='%23c84a35' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root{--ink:#17201f;--forest:#102d2a;--red:#bd4634;--paper:#f5efdf;--gold:#d1a843;--muted:#68716d}
+    *{box-sizing:border-box} html{font-size:16px} body{margin:0;min-height:100svh;color:var(--ink);font-family:"Yu Mincho","Hiragino Mincho ProN",Georgia,serif;background:var(--forest)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background-image:radial-gradient(#fff 0.7px,transparent .8px);background-size:7px 7px}
+    .page{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden}
+    .sun{position:absolute;width:23rem;height:23rem;border-radius:50%;background:#bf4a36;top:-10rem;right:-8rem;opacity:.9}
+    header{z-index:1;display:flex;align-items:center;justify-content:space-between;padding:1.3rem clamp(1.25rem,4vw,4rem);color:#fff}
+    .brand{display:flex;gap:.7rem;align-items:center;font-weight:700;letter-spacing:.13em}.seal{display:grid;place-items:center;width:2.15rem;height:2.15rem;border:1px solid #fff8;border-radius:3px;font-size:.8rem;line-height:1}
+    .date{font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.12em;color:#dfe8e5}
+    main{z-index:1;display:grid;place-items:center;padding:1rem clamp(1rem,4vw,4rem) 2rem}
+    .stage{width:min(62rem,100%);display:grid;grid-template-columns:minmax(13rem,.62fr) minmax(0,1.38fr);box-shadow:0 28px 75px #06161388}
+    .intro{background:#0b2522;color:#f9f2df;padding:clamp(2rem,5vw,4.5rem);display:flex;flex-direction:column;justify-content:space-between;min-height:34rem}
+    .eyebrow{font-family:system-ui,sans-serif;color:#d6bd75;font-size:.76rem;letter-spacing:.24em;text-transform:uppercase}.intro h1{font-size:clamp(2.4rem,5vw,4.7rem);font-weight:500;line-height:1.12;letter-spacing:.06em;margin:1rem 0}.intro p{color:#cbd7d2;line-height:1.9;margin:0;max-width:23rem}
+    button{appearance:none;border:0;font:700 1rem system-ui,sans-serif;background:var(--red);color:#fff;border-radius:999px;padding:1.05rem 1.4rem;cursor:pointer;box-shadow:0 8px 0 #7e2d22;transition:transform .16s,box-shadow .16s,background .16s;width:100%;margin-top:2rem}button:hover{background:#cf523e;transform:translateY(-2px);box-shadow:0 10px 0 #7e2d22}button:active{transform:translateY(5px);box-shadow:0 3px 0 #7e2d22}button:focus-visible{outline:3px solid #f0ce72;outline-offset:4px}
+    .result{background:var(--paper);padding:clamp(2rem,5vw,5rem);min-height:34rem;display:flex;flex-direction:column;justify-content:center;position:relative}.result:after{content:"言";position:absolute;right:1.5rem;bottom:.4rem;color:#e9dfc6;font-size:9rem;line-height:1;pointer-events:none}
+    .fortune{display:flex;align-items:center;gap:.8rem;color:var(--red);font-weight:700;letter-spacing:.22em;font-size:.78rem}.fortune:after{content:"";height:1px;background:#cdbf9f;flex:1}
+    blockquote{margin:1.8rem 0 1rem;font-size:clamp(1.65rem,3.3vw,3rem);line-height:1.55;font-weight:600;letter-spacing:.03em;position:relative;z-index:1}
+    .original{font-family:Georgia,serif;font-style:italic;color:#58615e;line-height:1.65;margin:0 0 1.8rem;font-size:1rem}
+    .person{border-top:1px solid #cdbf9f;padding-top:1.35rem;position:relative;z-index:1}.name{font-size:1.18rem;font-weight:700}.bio{font-family:system-ui,sans-serif;color:#59625f;font-size:.92rem;line-height:1.75;margin:.45rem 0 0}
+    .result.draw .fortune,.result.draw blockquote,.result.draw .original,.result.draw .person{animation:reveal .55s both}.result.draw blockquote{animation-delay:.08s}.result.draw .original{animation-delay:.16s}.result.draw .person{animation-delay:.24s}@keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    footer{z-index:1;color:#b8cac5;text-align:center;padding:1rem;font: .75rem system-ui,sans-serif;letter-spacing:.06em}
+    @media(max-width:720px){.sun{width:15rem;height:15rem;top:-7rem;right:-7rem}.stage{grid-template-columns:1fr}.intro{min-height:auto;padding:2rem}.intro h1{font-size:2.5rem;margin:.65rem 0}.intro p{font-size:.92rem;line-height:1.7}.result{min-height:24rem;padding:2rem}.result:after{font-size:6rem}blockquote{font-size:1.65rem;margin-top:1.3rem}header{padding:1rem 1.2rem}.date{display:none}button{margin-top:1.5rem}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="sun" aria-hidden="true"></div>
+    <header><div class="brand"><span class="seal">言<br>葉</span><span>ことばみくじ</span></div><div class="date" id="date"></div></header>
+    <main>
+      <section class="stage" aria-label="今日のことばみくじ">
+        <div class="intro"><div><div class="eyebrow">A word for today</div><h1>今日の<br>ことば</h1><p>心を静かに、ひとつ引いてみましょう。今のあなたに届く、世界の偉人の言葉です。</p></div><button id="draw" type="button">ことばを引く</button></div>
+        <div class="result" id="result" aria-live="polite"><div class="fortune" id="fortune">今日の一言</div><blockquote id="quote">一歩を踏み出す準備ができたら、<br>ボタンを押してください。</blockquote><p class="original" id="original" hidden></p><div class="person" id="person" hidden><div class="name" id="name"></div><p class="bio" id="bio"></p></div></div>
+      </section>
+    </main>
+    <footer>言葉との出会いを、今日の小さな道しるべに。</footer>
+  </div>
+  <script>
+    const words=[
+      {ja:"生きるとは、呼吸することではない。行動することだ。",original:"To live is not to breathe but to act.",name:"ジャン＝ジャック・ルソー",bio:"18世紀フランスで活躍した思想家・作家。自由や教育についての考察で、近代思想に大きな影響を与えました。"},
+      {ja:"成功とは、情熱を失わずに失敗を重ねることである。",original:"Success is stumbling from failure to failure with no loss of enthusiasm.",name:"ウィンストン・チャーチル",bio:"第二次世界大戦期に英国首相を務めた政治家・著述家。1953年にノーベル文学賞を受賞しました。"},
+      {ja:"想像力は知識よりも大切だ。知識には限界があるからだ。",original:"Imagination is more important than knowledge. Knowledge is limited.",name:"アルベルト・アインシュタイン",bio:"相対性理論を築いた理論物理学者。20世紀の科学観を大きく変え、1921年にノーベル物理学賞を受賞しました。"},
+      {ja:"自分自身を知ることは、すべての知恵の始まりである。",original:"Knowing yourself is the beginning of all wisdom.",name:"アリストテレス",bio:"古代ギリシャの哲学者。論理学、倫理学、政治学、自然科学など、幅広い領域の基礎を築きました。"},
+      {ja:"千里の道も一歩から始まる。",original:"A journey of a thousand miles begins with a single step.",name:"老子",bio:"古代中国の思想家とされ、『老子』にその思想が伝わります。自然に逆らわない生き方「無為自然」を説きました。"},
+      {ja:"人生は自転車に乗るようなものだ。バランスを保つには、動き続けなければならない。",original:"Life is like riding a bicycle. To keep your balance, you must keep moving.",name:"アルベルト・アインシュタイン",bio:"相対性理論を築いた理論物理学者。好奇心と想像力を重んじ、科学を超えて多くの人に影響を与えました。"},
+      {ja:"できると思っても、できないと思っても、どちらも正しい。",original:"Whether you think you can, or you think you can't—you're right.",name:"ヘンリー・フォード",bio:"米国の実業家。自動車の大量生産方式を確立し、移動を多くの人の身近なものにしました。"},
+      {ja:"幸せだから感謝するのではない。感謝するから幸せなのだ。",original:"It is not happiness that makes us grateful. It is gratefulness that makes us happy.",name:"デヴィッド・シュタインドル＝ラスト",bio:"オーストリア出身の修道士・著述家。感謝を軸にした生き方について、世界各地で語ってきました。"},
+      {ja:"未来を予測する最善の方法は、それを創り出すことだ。",original:"The best way to predict the future is to create it.",name:"ピーター・ドラッカー",bio:"経営学の発展に大きな影響を与えた思想家・著述家。組織と社会における人の役割を考察しました。"},
+      {ja:"人生で恐れるべきものは何もない。ただ、理解すべきものがあるだけだ。",original:"Nothing in life is to be feared; it is only to be understood.",name:"マリ・キュリー",bio:"放射能研究を切り開いた物理学者・化学者。異なる二つの科学分野でノーベル賞を受賞した最初の人物です。"},
+      {ja:"大切なのは、疑問を持つことをやめないことだ。",original:"The important thing is not to stop questioning.",name:"アルベルト・アインシュタイン",bio:"相対性理論で知られる理論物理学者。常識を問い直す姿勢と探究心を生涯大切にしました。"},
+      {ja:"機会は、たいてい困難な仕事の姿をしている。",original:"Opportunity is missed by most people because it is dressed in overalls and looks like work.",name:"トーマス・エジソン",bio:"蓄音機や実用的な白熱電球などを開発した米国の発明家。研究開発を組織化した先駆者でもあります。"},
+      {ja:"光を広げる方法は二つある。ろうそくになるか、それを映す鏡になるかだ。",original:"There are two ways of spreading light: to be the candle or the mirror that reflects it.",name:"イーディス・ウォートン",bio:"米国の小説家。上流社会を鋭く描き、女性として初めてピューリッツァー賞の小説部門を受賞しました。"},
+      {ja:"私たちが恐れなければならない唯一のものは、恐れそのものだ。",original:"The only thing we have to fear is fear itself.",name:"フランクリン・D・ルーズベルト",bio:"世界恐慌と第二次世界大戦期に米国大統領を務め、ニューディール政策を進めました。"},
+      {ja:"私たちは皆、どぶの中にいる。だが、その中から星を見上げる者もいる。",original:"We are all in the gutter, but some of us are looking at the stars.",name:"オスカー・ワイルド",bio:"19世紀アイルランド出身の作家・劇作家。機知に富む言葉と社会風刺で知られています。"},
+      {ja:"学べば学ぶほど、自分がどれほど知らないかに気づく。",original:"The more I learn, the more I realize how much I don't know.",name:"アルベルト・アインシュタイン",bio:"20世紀を代表する理論物理学者。科学への謙虚さと尽きない好奇心を持ち続けました。"},
+      {ja:"人生で最も素晴らしく美しいものは、目で見たり手で触れたりできない。心で感じるものだ。",original:"The best and most beautiful things in the world cannot be seen or even touched—they must be felt with the heart.",name:"ヘレン・ケラー",bio:"視覚と聴覚の障害を乗り越えて学び、著述家・社会活動家として障害者福祉や人権のために活動しました。"},
+      {ja:"どんなことでも、成し遂げるまでは不可能に見える。",original:"It always seems impossible until it's done.",name:"ネルソン・マンデラ",bio:"南アフリカの反アパルトヘイト運動を率い、同国初の黒人大統領となった人権活動家です。"},
+      {ja:"何もしなければ、何も動き出さない。",original:"Nothing will work unless you do.",name:"マヤ・アンジェロウ",bio:"米国の詩人・作家・公民権活動家。人生の尊厳と自由を力強い言葉で表現しました。"},
+      {ja:"今日は、残りの人生の最初の日である。",original:"Today is the first day of the rest of your life.",name:"チャールズ・ディードリッヒ",bio:"米国で依存症からの回復を支援した活動家。仲間同士の助け合いを重視する支援運動を始めました。"}
+    ];
+    const labels=["吉・一歩前へ","吉・心しなやかに","大吉・新しい風","吉・静かな勇気","中吉・学びの種"];
+    let last=-1; const $=id=>document.getElementById(id);
+    $("date").textContent=new Intl.DateTimeFormat("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"}).format(new Date());
+    $("draw").addEventListener("click",()=>{let i;do{i=Math.floor(Math.random()*words.length)}while(i===last&&words.length>1);last=i;const w=words[i],r=$("result");r.classList.remove("draw");void r.offsetWidth;$("fortune").textContent=labels[Math.floor(Math.random()*labels.length)];$("quote").textContent=w.ja;$("original").textContent=w.original;$("original").hidden=!w.original;$("name").textContent=w.name;$("bio").textContent=w.bio;$("person").hidden=false;r.classList.add("draw");$("draw").textContent="もう一度引く";if(innerWidth<721)r.scrollIntoView({behavior:"smooth",block:"center"})});
+  </script>
+</body>
+</html>
