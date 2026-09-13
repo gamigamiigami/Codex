@@ -26,6 +26,8 @@
 - prefers-reduced-motion: reduceでアニメーションがnone、スクロールがautoになることを確認。
 - 検証タブのコンソールにerror/warnなし。
 - node --check app.jsで構文確認。
+- HTML内のローカルリンク・画像参照に欠落がないことを確認。
+- PR #3のmain統合後、Actions実行34745197536がsuccess。公開比較ページとA〜Eの全ページで見出し・図版の表示を確認。
 - スクリーンリーダーの実機読み上げ、iOS Safari・Android実機での操作は未検証。参考サイトの全件調査は行わず、関連する5件を重点確認。
 
 ## 公開と引き継ぎ

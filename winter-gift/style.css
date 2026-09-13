@@ -8,4 +8,5 @@
 .concept-e h1{animation:arrive .7s var(--ease) both}.concept-b .hero:has(.cta:hover) .envelope,.concept-b .hero:has(.cta:focus-visible) .envelope{transform:rotate(6deg) translateY(-4px)}
 @media(max-width:760px){.concept-a .shade{background:linear-gradient(180deg,#081f30e6 0%,#0c293ce0 47%,#0c293c99 68%,#0c293c12 86%)}.concept-a .event-meta{color:#f3ecd3}}
 @media(max-width:760px){.concept-e h1{font-size:clamp(42px,14vw,57px)}}
+@media(max-width:760px){.overview-intro h1 span{font-size:clamp(23px,7.5vw,30px);white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.concept-card:hover .miniature img,.postal-art:hover .envelope,.concept-b .hero:has(.cta:hover) .envelope,.concept-b .hero:has(.cta:focus-visible) .envelope{transform:none}}
