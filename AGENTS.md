@@ -41,10 +41,16 @@
 - Work on a focused branch rather than directly on the default branch unless the user explicitly requests otherwise or the environment supplies an isolated worktree.
 - Keep commits small and cohesive. Use descriptive commit messages and exclude generated output, local caches, secrets, and unrelated changes.
 - Use pull requests for review and integration. Summarize intent, key changes, tests run, visual evidence for UI changes, risks, and follow-up work.
-- Ensure setup is reproducible in Codex Cloud: commit manifests and lockfiles, document required non-secret environment variables, avoid machine-specific absolute paths, and provide deterministic setup/test commands.
+- Use the desktop app and the user's selected model; do not use Codex Cloud. Do not install additional software on the workplace PC or incur additional costs. Prefer available tools and report missing verification capabilities.
+- Keep completed projects in individual top-level folders on main. Record progress and reproducible setup/test steps inside each project so another PC or agent can continue. Do not assume GitHub synchronizes application chat history or installed tools.
+
+## Shared website authoring
+
+- For website creation or redesign, read `.agents/skills/web-product-development/SKILL.md` even if automatic skill discovery has not exposed it. These are repository instructions, not an installation of a runtime or browser tool.
+- Prefer HTML, CSS and JavaScript for new static sites; choose additional tooling only when product needs justify it and it is compatible with the user's environment and budget.
+- Default hosting is GitHub Pages with separate project URL paths. Preserve sibling projects when staging deployment output. Do not flatten one project's contents to the deployment root when folder-based URLs are required. Never publish repository secrets or development-only files.
 
 ## Reporting
 
 - Report files changed, behavior affected, checks run and their results, any assumptions, remaining risks, and any manual steps.
 - Never claim a test, browser check, deployment, authentication, or external integration succeeded unless it was actually verified.
-
