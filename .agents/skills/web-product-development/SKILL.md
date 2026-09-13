@@ -11,6 +11,16 @@ For an unclear product idea, first establish the primary user, key task, essenti
 
 ## Design decisions
 
+For Japanese public-facing copy and design work, read [Japanese editorial and design criteria](references/japanese-editorial-design.md) before authoring. Use the criteria to make content-specific decisions, not to impose one visual template.
+
+## Environment and delivery
+
+- Work through the desktop app, not Codex Cloud. Use existing tools; do not install additional tools on the workplace PC or introduce paid services.
+- A static site needs HTML for structure, CSS for presentation, and JavaScript for behavior. These are authored files, not three programs that must be installed. A supported browser can run them. React/TypeScript and build dependencies are optional, not prerequisites for professional design.
+- Inventory available browser, execution and image tools before promising verification. Repository skills do not supply those tools. Use image generation only if available within the user's existing allowance; use licensed assets or an intentional typography-led design when unavailable.
+- Keep each site in a top-level project folder. For multiple Pages projects, stage the intended public folders while preserving their names. One Pages deployment replaces the previous site's output; do not deploy each project separately to the same destination and erase its siblings.
+- Validate the actual production path after deployment. Record incomplete checks and hosting blockers honestly. Add a short project README with its purpose, file layout, commands if any, public URL, checks and remaining work.
+
 - Derive a deliberate visual direction from the product's audience and content. Reuse existing tokens and components when present.
 - Make hierarchy, typography, spacing, color, and interaction states coherent across mobile and desktop.
 - Avoid interchangeable hero-card-grid templates, excessive gradients, decorative glass effects, and animation without purpose.
